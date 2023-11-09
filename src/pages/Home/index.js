@@ -10,7 +10,7 @@ export default function Home() {
   const navigation = useNavigation();
   const generateUniqueId = () => {
     const timestamp = new Date().getTime();
-    const randomValue = Math.floor(Math.random() * 1000); // Pode ajustar o valor máximo conforme necessário.
+    const randomValue = Math.floor(Math.random() * 1000); 
     return `${timestamp}-${randomValue}`;
   };
   const [products, setProducts] = useState([
@@ -49,7 +49,7 @@ export default function Home() {
   useEffect(() => {
     const loadCart = async () => {
       try {
-        const cartData = await AsyncStorage.getItem('cart'); // Altere 'products' para 'cart' aqui
+        const cartData = await AsyncStorage.getItem('cart'); 
         if (cartData) {
           setCart(JSON.parse(cartData));
         }
@@ -73,7 +73,7 @@ export default function Home() {
   
     if (existingProduct) {
       console.log('Produto já existe no carrinho, antes:', cart);
-      // Se o produto já existe no carrinho, atualize a quantidade
+     
       const updatedCart = cart.map((item) => {
         if (item.id === product.id) {
           return { ...item, quantity: item.quantity + 1 };
@@ -83,7 +83,7 @@ export default function Home() {
   
       console.log('Produto já existe no carrinho, depois:', updatedCart);
   
-      setCart(updatedCart); // Atualiza o estado do carrinho
+      setCart(updatedCart);
   
       try {
         await AsyncStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -92,10 +92,10 @@ export default function Home() {
       }
     } else {
       console.log('Produto não existe no carrinho, antes:', cart);
-      // Se o produto não existe no carrinho, adicione-o com quantidade 1
+      
       const updatedCart = [...cart, { ...product, quantity: 1 }];
       console.log('Produto não existe no carrinho, depois:', updatedCart);
-      setCart(updatedCart); // Atualiza o estado do carrinho
+      setCart(updatedCart); 
   
       try {
         await AsyncStorage.setItem('cart', JSON.stringify(updatedCart));

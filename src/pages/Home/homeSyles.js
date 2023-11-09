@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
  
   containerBar: {
         flex:1,
-        position: 'absolute', // Use 'absolute' para posicionar independentemente
-        bottom: 0, // Posição na parte inferior da tela
-        width: '100%', // Largura total
+        position: 'absolute', 
+        bottom: 0, 
+        width: '100%', 
         height: 98,
         backgroundColor: '#20B2AA',
         justifyContent: 'center',
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     
   },
   buttonContainer: {
-    flexDirection: 'row', // Botões dentro dos produtos ficarão um ao lado do outro.
+    flexDirection: 'row', 
     justifyContent: 'center',
     gap:50
   },
