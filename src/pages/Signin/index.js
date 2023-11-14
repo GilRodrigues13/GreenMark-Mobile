@@ -1,11 +1,50 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
-import * as Animatable from 'react-native-animatable'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react';
+import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
 import { signinStyles as styles } from './signinStyles';
 
 export default function Signin() {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignIn = () => {
+    
+    if (validateEmail(email) && validatePassword(password)) {
+      
+      if (isValidUser(email, password)) {
+        
+        navigation.navigate('Home');
+      } else {
+        
+        Alert.alert('Erro', 'Email ou senha inválidos');
+      }
+    } else {
+      
+      Alert.alert('Erro', 'Email ou senha inválidos');
+    }
+  };
+
+  const validateEmail = (email) => {
+    // Adicione sua lógica de validação de email aqui
+     return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 6;
+  };
+
+  const isValidUser = (email, password) => {
+    
+    const validUsers = [
+      { email: 'gil@gmail.com', password: '123456' },
+    
+    ];
+
+    
+    return validUsers.some(user => user.email === email && user.password === password);
+  };
 
   return (
     <View style={styles.container}>
@@ -14,27 +53,33 @@ export default function Signin() {
       </Animatable.View>
 
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
-          <Text style={styles.title}>Email</Text>
-          <TextInput 
+        <Text style={styles.title}>Email</Text>
+        <TextInput 
           placeholder='Digite seu Email'
           style={styles.input}
-          />
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
 
-          <Text style={styles.title}>Senha</Text>
-          <TextInput 
+        <Text style={styles.title}>Senha</Text>
+        <TextInput 
           placeholder='Digite sua senha'
           style={styles.input}
-          />
+          secureTextEntry={true}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
 
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
-            <Text style={styles.buttonText}>Acessar</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+          <Text style={styles.buttonText}>Acessar</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonRegister}>
-            <Text onPress={() => navigation.navigate('Signup')} style={styles.registerText}>Não possui uma conta? Cadastre-se</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonRegister}>
+          <Text onPress={() => navigation.navigate('Signup')} style={styles.registerText}>
+            Não possui uma conta? Cadastre-se
+          </Text>
+        </TouchableOpacity>
       </Animatable.View>
     </View>
-  )
-}
-
+  );
+};

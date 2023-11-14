@@ -5,6 +5,7 @@ import Signup, {} from '../pages/Signup';
 import Home, {} from '../pages/Home';
 import Cart, {} from '../pages/Cart';
 import Pay from '../pages/Pay';
+import Historico from '../pages/Historico';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,12 @@ export default function Routes(){
             <Stack.Screen 
             name="Pay"
             component={Pay}
+            options={{ headerShown: false}}
+            />
+
+            <Stack.Screen 
+            name="Historico"
+            component={Historico}
             options={{ headerShown: false}}
             />
                 

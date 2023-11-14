@@ -29,7 +29,7 @@ export default function Cart() {
     loadCartFromStorage();
   }, []);
 
-  // Calcula o valor total
+  
   useEffect(() => {
     const calculateTotalPrice = () => {
       const total = cart.reduce((acc, product) => acc + product.price, 0);
@@ -38,6 +38,7 @@ export default function Cart() {
     
     calculateTotalPrice();
   }, [cart]);
+  
 
   return (
     <View style={styles.container}>
@@ -69,9 +70,9 @@ export default function Cart() {
           <TouchableOpacity
         style={styles.buttonComprar}
         onPress={() => navigation.navigate('Pay')} 
-        // Substitua handleCompra pelo que você deseja fazer ao clicar no botão
+        
         >
-        <Text style={styles.textButtonComprar}>Comprar</Text>
+        <Text style={styles.textButtonComprar}>Continuar</Text>
       </TouchableOpacity>
         </ScrollView>
       )}
@@ -79,9 +80,6 @@ export default function Cart() {
       {cart.length === 0 && (
         <Text style={styles.textVazio}>O carrinho está vazio</Text>
       )}
-
-      {/* Renderize o valor total na tela */}
-    
 
       
 
